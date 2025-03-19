@@ -1,0 +1,25 @@
+/* Ürün Resimlerinin Dengeli Görünmesi */
+.card img {
+     height: 250px;
+     object-fit: cover;
+ }
+ 
+ /* Kart Hover Efekti */
+ .card {
+     transition: transform 0.3s ease-in-out;
+ }
+ 
+ .card:hover {
+     transform: scale(1.05);
+ }
+ 
+ /* Kategori Butonları */
+ .btn-outline-dark {
+     transition: background-color 0.3s, color 0.3s;
+ }
+ 
+ .btn-outline-dark:hover {
+     background-color: black;
+     color: white;
+ }
+ 

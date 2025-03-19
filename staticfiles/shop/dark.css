@@ -1,0 +1,128 @@
+:root {
+    --background: #0F1624;        
+    --card-background: #141C2C;
+    --text-color: #F0F6FC;
+    --primary-color: #4A90E2;
+    --secondary-color: #1B2535;
+    --button-hover: #0056b3;
+    --border-color: #23304A;      
+    --shadow-color: rgba(0, 0, 255, 0.3);
+    --form-bg: #1B2535;
+    --form-border: #4A90E2;
+    --transition-time: 0.3s;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    transition: background-color var(--transition-time), color var(--transition-time);
+}
+
+/* Navbar */
+.neon-navbar {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-bottom: 2px solid var(--primary-color);
+    transition: var(--transition-time);
+}
+
+.neon-text {
+    font-size: 24px;
+    color: var(--primary-color);
+    text-shadow: 0px 0px 15px var(--primary-color);
+}
+
+/* Butonlar */
+.neon-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 15px;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px var(--primary-color);
+    box-shadow: 0px 0px 15px rgba(74, 144, 226, 0.5);
+    transition: var(--transition-time);
+}
+
+.neon-btn:hover {
+    background-color: var(--button-hover);
+    box-shadow: 0px 0px 20px var(--primary-color);
+    transform: scale(1.05);
+}
+
+/* Kart Tasarımı */
+.card {
+    width: 250px;
+    height: 350px;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 0px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition-time), box-shadow var(--transition-time);
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 0px 20px var(--shadow-color);
+}
+
+/* Kart Resimleri */
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Kart İçeriği */
+.card-body {
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* Formlar */
+input, select {
+    background-color: var(--form-bg);
+    border: 1px solid var(--form-border);
+    color: var(--text-color);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0px 0px 8px var(--primary-color);
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+/* Sayfa Açılış Animasyonu */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,64 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Tüm Ürünler{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="categories-scroll bg-dark p-3 shadow-sm rounded mb-4">
+        <div class="d-flex overflow-auto">
+            {% for category in categories %}
+                <a href="{% url 'shop:product_list_by_category' category.slug %}" class="btn neon-btn me-2">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Sol Filtreleme Alanı -->
+        <aside class="col-md-3">
+            <div class="list-group">
+                <h5 class="fw-bold neon-text">Marka</h5>
+                {% for brand in brands %}
+                    <a href="?brand={{ brand.slug }}" class="list-group-item list-group-item-action">{{ brand.name }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="list-group">
+                <h5 class="fw-bold neon-text">Fiyat Aralığı</h5>
+                <form method="GET">
+                    <input type="number" name="min_price" placeholder="Min" class="form-control mb-2">
+                    <input type="number" name="max_price" placeholder="Max" class="form-control mb-2">
+                    <button type="submit" class="btn neon-btn w-100">Filtrele</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Ürün Listesi -->
+        <main class="col-md-9">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-3">
+                        <a href="{% url 'shop:product_detail' product.slug %}" class="text-decoration-none">
+                            <div class="card neon-card">
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                                <div class="card-body">
+                                    <h6 class="text-white">{{ product.name }}</h6>
+                                    <p class="product-description">{{ product.description }}</p>
+                                    <p class="text-warning">{{ product.price }} TL</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            
+            
+
+
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

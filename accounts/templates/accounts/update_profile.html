@@ -1,0 +1,14 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Profil Bilgilerini Güncelle{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Profil Bilgilerini Güncelle</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Güncelle</button>
+    </form>
+</div>
+{% endblock %}

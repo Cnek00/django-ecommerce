@@ -1,0 +1,126 @@
+{% extends "shop/base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Ürün Görseli -->
+        <div class="col-md-6 text-center">
+            <div class="product-image-container">
+                <img src="{{ product.image.url }}" class="product-image" alt="{{ product.name }}">
+            </div>
+        </div>
+
+        <!-- Ürün Bilgileri -->
+        <div class="col-md-6">
+            <h1 class="fw-bold">{{ product.name }}</h1>
+            <p class="text-muted">{{ product.description }}</p>
+
+            <!-- Ürün Fiyatı ve Stok Durumu -->
+            <h3 class="text-success fw-bold">{{ product.price }} TL</h3>
+            <p class="text-muted">
+                {% if product.stock >= product.stock > 0 %}
+                    ✅ Stokta Var
+                {% else %}
+                    ❌ Tükendi
+                {% endif %}
+            </p>
+
+            <!-- Sepete Ekle & Favorilere Ekle Butonları -->
+            <form action="{% url 'cart:cart_add' product.id %}" method="POST" class="d-flex">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="1" min="1" class="form-control w-25 me-2">
+                <button type="submit" class="btn btn-success">🛒 Sepete Ekle</button>
+            </form>
+
+            <!-- Favori Butonu -->
+            <form action="{% url 'shop:add_to_favorites' product.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="fav-btn">❤</button>
+            </form>
+
+            <form action="{% url 'shop:remove_from_favorites' product.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-secondary">❌ Favorilerden Kaldır</button>
+            </form>
+
+            <a href="{% url 'cart:cart_detail' %}" class="btn neon-btn mt-3">Sepete Git</a>
+
+            <!-- Ürün Puanı -->
+            <p>⭐ Ortalama Puan: <strong>{{ average_rating|floatformat:1 }}</strong>/5</p>
+        </div>
+    </div>
+
+
+
+   <!-- Ürün Yorumları -->
+    <div class="mt-5">
+        <h3>Ürün Yorumları</h3>
+        {% if reviews %}
+            <div id="review-container">
+                {% for review in reviews %}
+                    <div class="comment-box">
+                        <p><strong>{{ review.user.username }}</strong> - {{ review.created_at }}</p>
+                        <p>⭐ {{ review.rating }}/5</p>
+                        <p>{{ review.comment }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if total_reviews > 3 %}
+                <button id="show-more-reviews" class="btn neon-btn mt-3">Daha Fazla Yorum Göster</button>
+            {% endif %}
+        {% else %}
+            <p>Henüz yorum yapılmamış.</p>
+        {% endif %}
+
+        <!-- Yeni Yorum Formu -->
+        <h4 class="mt-4">Yorum Yap</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="rating">Puanınız:</label>
+                <select name="rating" class="form-select">
+                    <option value="1">⭐ 1</option>
+                    <option value="2">⭐⭐ 2</option>
+                    <option value="3">⭐⭐⭐ 3</option>
+                    <option value="4">⭐⭐⭐⭐ 4</option>
+                    <option value="5">⭐⭐⭐⭐⭐ 5</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="comment">Yorumunuz:</label>
+                <textarea name="comment" rows="3" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark">Gönder</button>
+        </form>
+    </div>
+
+
+    
+    <!-- Benzer Ürünler -->
+<div class="similar-products mt-5">
+    <h3>Benzer Ürünler</h3>
+    <div class="row">
+        {% for similar_product in similar_products %}
+            <div class="col-md-3">
+                <a href="{% url 'shop:product_detail' similar_product.slug %}" class="text-decoration-none">
+                    <div class="card neon-card">
+                        <img src="{{ similar_product.image.url }}" class="card-img-top" alt="{{ similar_product.name }}">
+                        <div class="card-body">
+                            <h6 class="text-white">{{ similar_product.name }}</h6>
+                            <p class="product-description">{{ similar_product.description }}</p>
+                            <p class="text-warning">{{ similar_product.price }} TL</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+    
+    
+</div>
+{% endblock %}

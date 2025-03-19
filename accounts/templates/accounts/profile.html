@@ -1,0 +1,65 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Profilim{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Profil Bilgileri -->
+        {% comment %} <div class="col-md-4"> {% endcomment %}
+        <div class="account-profile">
+            <div class="card shadow-sm p-3">
+                <div class="text-center">
+                    <img src="{{ user.userprofile.profile_image.url }}" alt="Profil Resmi" class="rounded-circle mb-3" width="150">
+                    <h5 class="fw-bold">{{ user.first_name }} {{ user.last_name }}</h5>
+                    <p class="text-muted">@{{ user.username }}</p>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success w-100">Profil Resmini Güncelle</button>
+                </form>
+            </div>
+        {% comment %} </div> {% endcomment %}
+        </div>
+
+        <!-- Kullanıcı Bilgileri -->
+        <div class="col-md-8">
+            <div class="card shadow-sm p-3">
+                <h4 class="fw-bold">Profil Bilgilerim</h4>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Kullanıcı Adı:</strong> {{ user.username }}</li>
+                    <li class="list-group-item"><strong>Ad Soyad:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+                    <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                    <li class="list-group-item"><strong>Telefon:</strong> {{ user.userprofile.phone }}</li>
+                    <li class="list-group-item"><strong>Adres:</strong> {{ user.userprofile.address }}</li>
+                    <li class="list-group-item"><strong>Doğum Tarihi:</strong> {{ user.userprofile.birth_date }}</li>
+                </ul>
+                <a href="{% url 'accounts:update_profile' %}" class="btn btn-warning mt-3">Bilgileri Güncelle</a>
+                <a href="{% url 'accounts:change_password' %}" class="btn btn-danger mt-3">Şifre Değiştir</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sipariş Geçmişi -->
+    <div class="mt-4">
+        <h3 class="fw-bold">Sipariş Geçmişi</h3>
+        {% if orders %}
+            <div class="row">
+                {% for order in orders %}
+                    <div class="col-md-6">
+                        <div class="card shadow-sm p-3 mb-3">
+                            <h6><strong>Sipariş No:</strong> {{ order.id }}</h6>
+                            <p><strong>Tarih:</strong> {{ order.created_at }}</p>
+                            <p><strong>Durum:</strong> {% if order.paid %}✅ Ödendi{% else %}⏳ Bekliyor{% endif %}</p>
+                            <a href="{% url 'orders:order_detail' order.id %}" class="btn btn-primary btn-sm">Detayları Gör</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Henüz siparişiniz yok.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

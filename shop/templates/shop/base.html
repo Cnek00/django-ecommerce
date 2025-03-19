@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-Ticaret{% endblock %}</title>
+
+    <!-- Bootstrap & Stil -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Özel Tema ve Scriptler -->
+    <link rel="stylesheet" href="{% static 'shop/dark-theme.css' %}">
+    <script defer src="{% static 'shop/scripts.js' %}"></script>
+
+</head>
+<body class="dark-theme">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg neon-navbar">
+        <div class="container">
+            <a class="navbar-brand neon-text" href="{% url 'shop:product_list' %}">🛍️ E-Ticaret</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:favorites' %}">⭐ Favorilerim</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                <img src="{{ user.userprofile.profile_image.url }}" class="rounded-circle me-2" width="30" height="30">
+                                <span>{{ user.username }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end neon-dropdown">
+                                <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">👤 Profilim</a></li>
+                                <li><a class="dropdown-item text-danger" href="{% url 'accounts:logout' %}">🚪 Çıkış Yap</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">📝 Kayıt Ol</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">🔑 Giriş Yap</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- İçerik Alanı -->
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

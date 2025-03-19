@@ -1,0 +1,238 @@
+/* Genel Karanlık Tema */
+body {
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.neon-navbar {
+    background-color: #121212;
+    box-shadow: 0px 0px 20px #9d00ff;
+}
+
+/* Ürün Kartlarının Taşmasını Önle */
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Kart Tasarımlarını Düzenle */
+.neon-card {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px #9d00ff;
+    overflow: hidden;
+    width: 100%;
+    height: 400px; /* Sabit boyut */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease-in-out;
+    padding: 10px;
+    position: relative;
+}
+
+.neon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 0px 25px #ff0099;
+}
+
+/* Kart İçeriği */
+.neon-card .card-body {
+    flex-grow: 1;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Ürün Açıklamalarını Kısalt ve Taşmayı Önle */
+.neon-card .product-description {
+    font-size: 14px;
+    color: #bbbbbb;
+    height: 45px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Kartların Düzeni (Flex ile Sabitleme) */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Kartlar arasındaki mesafeyi artır */
+}
+
+/* Kartların İç İçe Girmesini Önle */
+.col-md-4 {
+    flex: 0 0 calc(33.333% - 20px); /* Üçlü grid sistemini koru */
+    max-width: calc(33.333% - 20px);
+}
+
+/* Ürün Resimlerini Sabit Boyutlandır */
+.neon-card img, .product-image {
+    width: 100%;
+    height: 250px; /* Sabit yükseklik */
+    object-fit: cover;
+    border-radius: 5px;
+    border-bottom: 2px solid #9d00ff;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Ürün Resmine Hover Efekti */
+.neon-card img:hover, .product-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 0px 10px #ff0099;
+}
+
+/* Benzer Ürünler Tıklanabilir Olsun */
+.similar-products .card {
+    cursor: pointer;
+}
+
+.similar-products .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px #ff0099;
+}
+
+/* Kartı Tamamen Tıklanabilir Yap */
+.neon-card a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Beyaz Kalan Alanları Karanlık Yap */
+.card, .card-body, .list-group-item, .form-control, .dropdown-menu {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+/* Dropdown Menüsü */
+.dropdown-menu {
+    background-color: #121212;
+    border: 1px solid #9d00ff;
+}
+
+.dropdown-menu a {
+    color: #ffffff !important;
+}
+
+.dropdown-menu a:hover {
+    background-color: #9d00ff;
+}
+
+/* Butonları Düzelt */
+.neon-btn {
+    width: 90%;
+    padding: 10px;
+    background: linear-gradient(45deg, #9d00ff, #ff0099);
+    color: white;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.neon-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px #ff0099;
+}
+
+/* Yorum Kartları */
+.comment-box {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #9d00ff;
+    margin-bottom: 10px;
+}
+
+.comment-box p {
+    color: #ffffff;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.comment-box strong {
+    color: #ff0099;
+}
+
+.comment-toggle {
+    background: transparent;
+    border: none;
+    color: #ff0099;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: 0.3s ease-in-out;
+}
+
+.comment-toggle:hover {
+    text-shadow: 0px 0px 10px #ff0099;
+}
+
+/* Ürün Başlıklarını Daha Resmi Yap */
+h1, h2, h3, h4, h5 {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+/* Favori Butonu */
+.fav-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #ff0099;
+    transition: transform 0.2s ease-in-out;
+}
+
+.fav-btn:hover {
+    transform: scale(1.2);
+    text-shadow: 0px 0px 10px #ff0099;
+}
+
+p {
+    color: #ffffff;
+}
+/* Ürün Kartlarının Taşmasını Önle */
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* bakçez */
+
+/* Tüm yazıları beyaz yap */
+body, h1, h2, h3, h4, h5, h6, p, a, span, label, input, textarea, select, button, strong {
+    color: #ffffff !important;
+}
+
+/* Beyaz kalan yerleri tamamen karanlık temaya uygun hale getir */
+.card, .card-body, .list-group-item, .form-control, .dropdown-menu {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+/* Navbar ve Dropdown menü yazıları */
+.navbar .nav-link, .dropdown-menu a {
+    color: #ffffff !important;
+}
+
+/* Navbar dropdown hover efekti */
+.dropdown-menu a:hover {
+    background-color: #9d00ff;
+}
+
+/* Butonları da beyaz yazı ile uyumlu hale getir */
+.btn, .btn-primary, .btn-dark, .btn-outline-secondary {
+    color: #ffffff !important;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, label, input, textarea, select, button, strong {
+    color: #ffffff !important;
+}

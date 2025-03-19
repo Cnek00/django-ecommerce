@@ -1,0 +1,12 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Sipariş Ver{% endblock %}
+
+{% block content %}
+    <h2>Sipariş Bilgilerinizi Girin</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Siparişi Tamamla</button>
+    </form>
+{% endblock %}

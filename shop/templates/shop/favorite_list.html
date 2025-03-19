@@ -1,0 +1,33 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Favori Ürünlerim{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="neon-text">Favori Ürünlerim</h2>
+    {% if favorites %}
+        <div class="row">
+            {% for favorite in favorites %}
+                <div class="col-md-4">
+                    <div class="card neon-card">
+                        <img src="{{ favorite.product.image.url }}" alt="{{ favorite.product.name }}">
+                        <div class="card-body">
+                            <h6>{{ favorite.product.name }}</h6>
+                            <p>{{ favorite.product.price }} TL</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'shop:product_detail' favorite.product.slug %}" class="btn neon-btn">İncele</a>
+                            <form action="{% url 'shop:remove_from_favorites' favorite.product.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger">❌ Kaldır</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Henüz favori eklediğiniz bir ürün yok.</p>
+    {% endif %}
+</div>
+{% endblock %}
